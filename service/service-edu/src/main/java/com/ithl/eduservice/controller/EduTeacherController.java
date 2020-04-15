@@ -28,6 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/eduservice/teacher")
+@CrossOrigin
 public class EduTeacherController {
     @Autowired
     private EduTeacherService eduTeacherService;
@@ -109,7 +110,7 @@ public class EduTeacherController {
         if (!StringUtils.isEmpty(end)) {
             queryWrapper.le("gmt_modified", end);
         }
-
+        queryWrapper.orderByDesc("gmt_create");
         eduTeacherService.page(teacherPage, queryWrapper);
 
         // 总记录数

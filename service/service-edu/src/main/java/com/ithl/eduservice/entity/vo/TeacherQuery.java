@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 @Data
 public class TeacherQuery implements Serializable {
+    private static final Long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "教师名称,模糊查询")
     private String name;
