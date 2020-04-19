@@ -17,8 +17,10 @@ public class EduCourseVo implements Serializable {
     private String id;
     @ApiModelProperty("讲师id")
     private String teacherId;
-    @ApiModelProperty("课程专业id")
+    @ApiModelProperty("一级课程专业id")
     private String subjectId;
+    @ApiModelProperty("二级课程的父亲id")
+    private String subjectParentId;
     @ApiModelProperty("课程标题")
     private String title;
     @ApiModelProperty("课程价格")
