@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ithl.eduservice.mapper.EduCourseMapper">
+    <select id="getPublicCourseInfo" resultType="com.ithl.eduservice.entity.vo.PublicCourseInfo">
+     		select ec.title,
+				ec.cover,
+				ec.lesson_num,
+				es2.title AS subjectLevelOne,
+				es1.title AS subjectLevelTwo,
+				et.`name` AS teacherName,
+				ec.price
+			from edu_course as ec
+			LEFT JOIN edu_teacher et on et.id = ec.teacher_id
+			LEFT JOIN edu_subject es1 on ec.subject_parent_id = es1.id
+			LEFT JOIN edu_subject es2 on ec.subject_id = es2.id
+			where ec.id = #{courseId}
+    </select>
+
+    <select id="getCourseInfoByCourseId" resultType="com.ithl.eduservice.entity.frontvo.CourseDetailInfoVo">
+				select ec.id,ec.title,ec.price,ec.lesson_num As lessonNum,ec.cover,ec.view_count As viewCount,ec.buy_count As buyCount,
+					ecd.description,et.avatar,ec.teacher_id As teacherId,et.`name` As teacherName,et.intro,
+					es2.id As subjectLevelOneId,es2.title As subjectLevelOne,
+					es1.id As subjectLevelTwoId,es1.title As subjectLevelTwo
+				from edu_course ec
+				LEFT JOIN edu_course_description ecd on ec.id = ecd.id
+				LEFT JOIN edu_teacher et on et.id =  ec.teacher_id
+				LEFT JOIN edu_subject es1 on ec.subject_id = es1.id
+				LEFT JOIN edu_subject es2 on ec.subject_parent_id = es2.id
+				where ec.id = #{courseId}
+    </select>
+</mapper>
